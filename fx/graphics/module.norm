@@ -1,0 +1,20 @@
+Module module() {
+  module(name: "fx.graphics", version: 1, dependencies: [exportedDependency(repository: "github", name: "fx.base", version: 1)], binding: jarBinding(target: mavenJar(group: "org.openjfx", artifact: "javafx-graphics", version: "25.0.2", resolution: sha256("385d5279369356c0bc40222ce4fb15949980e241e6042afd55f62ae050d44244")),
+    api: [
+      jarType(name: "Parent", members: []),
+      jarType(name: "Pane", members: ["getChildren"]),
+      jarType(name: "Region", members: ["setMaxWidth"]),
+      jarType(name: "stage.Window", members: []),
+      jarType(name: "EventTarget", members: []),
+      jarType(name: "Styleable", members: []),
+      jarType(name: "Platform", members: ["startup", "runLater", "exit", "isFxApplicationThread", "setImplicitExit"]),
+      jarType(name: "Node", members: ["setId", "getId", "getStyleClass", "setDisable", "requestFocus"]),
+      jarType(name: "Stage", members: ["setTitle", "setScene", "show", "close", "setOnCloseRequest", "setMinWidth", "setMinHeight"], overloads: [jarOverload(name: "new", parameterTypes: [])]),
+      jarType(name: "Scene", members: ["getStylesheets"], overloads: [jarOverload(name: "new", parameterTypes: ["javafx.scene.Parent", "double", "double"])]),
+      jarType(name: "StackPane", members: ["getChildren", "setPadding"], overloads: [jarOverload(name: "new", parameterTypes: [])]),
+      jarType(name: "VBox", members: ["setVgrow", "getChildren"], overloads: [jarOverload(name: "new", parameterTypes: ["double"])]),
+      jarType(name: "HBox", members: ["setHgrow", "getChildren"], overloads: [jarOverload(name: "new", parameterTypes: ["double"])]),
+      jarType(name: "Insets", members: [], overloads: [jarOverload(name: "new", parameterTypes: ["double"])]),
+      jarType(name: "Priority", members: [])
+    ]))
+}
