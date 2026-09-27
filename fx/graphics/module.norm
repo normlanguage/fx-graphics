@@ -1,5 +1,5 @@
 Module module() {
-  module(name: "fx.graphics", version: 1, dependencies: [exportedDependency(repository: "github", name: "fx.base", version: 1)], binding: jarBinding(target: mavenJar(group: "org.openjfx", artifact: "javafx-graphics", version: "25.0.2", resolution: sha256("385d5279369356c0bc40222ce4fb15949980e241e6042afd55f62ae050d44244")),
+  module(name: "fx.graphics", version: 2, dependencies: [exportedDependency(repository: "github", name: "fx.base", version: 1)], binding: jarBinding(target: mavenJar(group: "org.openjfx", artifact: "javafx-graphics", version: "25.0.2", resolution: sha256("385d5279369356c0bc40222ce4fb15949980e241e6042afd55f62ae050d44244")),
     api: [
       jarType(name: "Parent", members: []),
       jarType(name: "Pane", members: ["getChildren"]),
