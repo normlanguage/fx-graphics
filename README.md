@@ -2,10 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-Module identity and dependencies: [module.norm](fx/graphics/module.norm). Package toolchain: [workflow](.github/workflows/package.yml).
+The maintained JavaFX API is [javafx](https://github.com/normlanguage/javafx). Applications use its shared event, collection, scene graph and control types.
 
-Build: `norm package fx/graphics --output build/repository`.
+The [migration example](samples/migration/main.norm) and its [dependency](samples/migration/module.norm) are verified by the [released-toolchain workflow](.github/workflows/package.yml).
 
-Validated on Windows x64 with JVM execution and Native application startup. JavaFX artifacts are resolved from Maven Central; Norm packages are distributed through GitHub Releases. The [Native reachability metadata](fx/graphics/resources/META-INF/native-image/org.openjfx/javafx-graphics/reachability-metadata.json) follows [GraalVM's format](https://www.graalvm.org/jdk25/reference-manual/native-image/metadata/); [verify it against the OpenJFX Windows JAR](scripts/verify-native-image-metadata.py) when updating OpenJFX.
-
-[Sample ownership](samples/README.md).
+The historical module declaration remains in [module.norm](fx/graphics/module.norm). Published assets and tags retain their original identities.

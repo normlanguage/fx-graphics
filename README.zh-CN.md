@@ -2,10 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-模块身份和依赖见 [module.norm](fx/graphics/module.norm)，发布使用的工具链见[工作流](.github/workflows/package.yml)。
+JavaFX 的维护入口为 [javafx](https://github.com/normlanguage/javafx)。应用使用该模块统一的事件、集合、场景图和控件类型。
 
-构建：`norm package fx/graphics --output build/repository`。
+[迁移示例](samples/migration/main.norm)与[依赖声明](samples/migration/module.norm)通过[正式工具链工作流](.github/workflows/package.yml)验证。
 
-已在 Windows x64 验证 JVM 执行和 Native 应用启动。JavaFX 制品从 Maven Central 解析；Norm 包通过 GitHub Releases 分发。[Native 可达性元数据](fx/graphics/resources/META-INF/native-image/org.openjfx/javafx-graphics/reachability-metadata.json)遵循 [GraalVM 格式](https://www.graalvm.org/jdk25/reference-manual/native-image/metadata/)；升级 OpenJFX 时用[核查脚本](scripts/verify-native-image-metadata.py)对照 Windows JAR。
-
-[示例归属](samples/README.zh-CN.md)。
+历史模块声明保留在 [module.norm](fx/graphics/module.norm)，已发布资产和标签保留原有身份。

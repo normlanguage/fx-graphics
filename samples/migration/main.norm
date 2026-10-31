@@ -1,0 +1,67 @@
+package migration
+
+import std.concurrent.completion
+import std.core.Unit
+import std.core.Exception
+import javafx.Node
+import javafx.PasswordField
+import javafx.TextInputControl
+import javafx.passwordFieldNew
+import javafx.Pane
+import javafx.ObservableList
+import javafx.Orientation
+import javafx.NodeOrientation
+import javafx.buttonNew
+import javafx.stackPaneNew
+import javafx.sceneNew
+import javafx.imageNew
+import javafx.stageNew
+import javafx.platformStartup
+import javafx.platformExit
+import java.base.util.JavaList
+
+class Actions { Boolean fired = false }
+
+Void main() {
+  var result = completion<Unit>()
+  var pending = result.task()
+  try {
+    platformStartup(() {
+      try {
+        require(condition: Orientation.HORIZONTAL != Orientation.VERTICAL, message: "layout orientation comes from canonical JavaFX geometry")
+        PasswordField password = passwordFieldNew()
+        TextInputControl input = password
+        input.setText("secret")
+        require(condition: password.getText() == "secret", message: "password control inherits canonical text input type")
+        var button = buttonNew()
+        button.setText("Canonical JavaFX")
+        var actions = Actions()
+        button.setOnAction((event) { event!!.consume() actions.fired = true })
+        Node node = button
+        Pane pane = stackPaneNew()
+        ObservableList<Node> observable = pane.getChildren()!!
+        JavaList<Node> collection = observable
+        collection.add(node)
+        node.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT)
+        var stage = stageNew()
+        var scene = sceneNew(arg0: pane, arg1: 320.0, arg2: 180.0)
+        stage.setScene(scene)
+        var image = imageNew(arg0: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEUlEQVR4nGP438DwH4QZYAwAWsoJ+e+uaqEAAAAASUVORK5CYII=")
+        require(condition: !image.isError() && image.getWidth() == 2.0 && image.getHeight() == 2.0, message: "canonical Image decodes actual PNG bytes")
+        stage.getIcons()!!.add(image)
+        require(condition: stage.getIcons()!!.get(arg0: 0) == image, message: "canonical stage owns its configured icon")
+        require(condition: scene.getWindow() == stage, message: "canonical scene exposes its window")
+        try {
+          stage.show()
+          button.fire()
+          require(condition: actions.fired, message: "base Event callback receives control action")
+          require(condition: collection.get(arg0: 0) == node && pane.getChildren()!!.size() == 1, message: "graphics node and base collection share canonical types")
+          require(condition: node.getNodeOrientation() == NodeOrientation.RIGHT_TO_LEFT, message: "canonical geometry applies to native control")
+          result.succeed(Unit.Value)
+        } finally { stage.close() }
+      } catch Exception failure { result.fail(failure) }
+    })
+    pending.await()
+    printLine("javafx window migration passed")
+  } finally { platformExit() result.close() }
+}
